@@ -4,21 +4,33 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Entity
+@NoArgsConstructor
 @Data
-class Quest {
+@Entity
+public class Quest {
     @Id
     @GeneratedValue
     private Long id;
     private String name;
-    private boolean selected;
-    private boolean complete;
-    private Date created;
-    @OneToMany
-    private List<Stage> stages;
+    private boolean selected = false;
+    private boolean complete = false;
+    private Date created = new Date();
+//    @OneToMany(mappedBy = "quest")
+//    private List<Stage> stages = new ArrayList<Stage>();
+
+    public Quest(String name){
+        this.name = name;
+    }
+
+//    public void addStage(Stage stage){
+//        this.stages.add(stage);
+//    }
 }
