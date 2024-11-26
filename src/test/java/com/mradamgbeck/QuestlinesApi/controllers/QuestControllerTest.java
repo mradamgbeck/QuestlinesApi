@@ -2,6 +2,7 @@ package com.mradamgbeck.QuestlinesApi.controllers;
 
 
 import com.mradamgbeck.QuestlinesApi.entities.Quest;
+import com.mradamgbeck.QuestlinesApi.entities.StageLocation;
 import com.mradamgbeck.QuestlinesApi.repositories.QuestRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,8 +12,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -34,13 +37,31 @@ public class QuestControllerTest {
         quests.add(quest1);
         quests.add(quest2);
         quests.add(quest3);
-        when(repo.findAll()).thenReturn(quests);
     }
 
     @Test
     public void getAll() {
+        when(repo.findAll()).thenReturn(quests);
         List<Quest> expectedQuests = List.of(quest1, quest2, quest3);
         List<Quest> quests = controller.getAll();
+        verify(repo).findAll();
         assertEquals(expectedQuests, quests);
+    }
+
+    @Test
+    public void findById() {
+        long quest1Id = 1L;
+        when(repo.findById(quest1Id)).thenReturn(Optional.ofNullable(quest1));
+        Optional<Quest> quest = controller.findById(quest1Id);
+        verify(repo).findById(quest1Id);
+        assertEquals(quest1, quest.get());
+    }
+
+    @Test
+    public void saveOne() {
+        when(repo.save(quest1)).thenReturn(quest1);
+        Quest quest = controller.saveOne(quest1);
+        verify(repo).save(quest1);
+        assertEquals(quest1, quest);
     }
 }

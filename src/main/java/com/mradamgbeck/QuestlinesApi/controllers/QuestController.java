@@ -2,10 +2,10 @@ package com.mradamgbeck.QuestlinesApi.controllers;
 
 import com.mradamgbeck.QuestlinesApi.entities.Quest;
 import com.mradamgbeck.QuestlinesApi.repositories.QuestRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class QuestController {
@@ -18,5 +18,15 @@ public class QuestController {
     @GetMapping("/quests")
     List<Quest> getAll() {
         return repository.findAll();
+    }
+
+    @GetMapping("/quests/{id}")
+    public Optional<Quest> findById(@PathVariable("id") long id) {
+        return repository.findById(id);
+    }
+
+    @PostMapping("/quests")
+    public Quest saveOne(@RequestBody Quest quest) {
+        return repository.save(quest);
     }
 }

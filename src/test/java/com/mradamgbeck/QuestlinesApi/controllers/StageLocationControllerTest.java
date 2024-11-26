@@ -11,8 +11,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -41,13 +43,31 @@ public class StageLocationControllerTest {
         locations.add(stageLocation1);
         locations.add(stageLocation2);
         locations.add(stageLocation3);
-        when(repo.findAll()).thenReturn(locations);
     }
 
     @Test
-    public void getAll() {
+    public void findAll() {
+        when(repo.findAll()).thenReturn(locations);
         List<StageLocation> expectedLocations = List.of(stageLocation1, stageLocation2, stageLocation3);
         List<StageLocation> stageLocations = controller.getAll();
+        verify(repo).findAll();
         assertEquals(expectedLocations, stageLocations);
+    }
+
+    @Test
+    public void findById() {
+        long stageLocation1Id = 1L;
+        when(repo.findById(stageLocation1Id)).thenReturn(Optional.ofNullable(stageLocation1));
+        Optional<StageLocation> stageLocations = controller.findById(stageLocation1Id);
+        verify(repo).findById(stageLocation1Id);
+        assertEquals(stageLocation1, stageLocations.get());
+    }
+
+    @Test
+    public void saveOne() {
+        when(repo.save(stageLocation1)).thenReturn(stageLocation1);
+        StageLocation stageLocation = controller.saveOne(stageLocation1);
+        verify(repo).save(stageLocation1);
+        assertEquals(stageLocation1, stageLocation);
     }
 }

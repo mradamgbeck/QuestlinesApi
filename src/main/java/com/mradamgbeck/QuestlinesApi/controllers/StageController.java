@@ -2,10 +2,10 @@ package com.mradamgbeck.QuestlinesApi.controllers;
 
 import com.mradamgbeck.QuestlinesApi.entities.Stage;
 import com.mradamgbeck.QuestlinesApi.repositories.StageRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class StageController {
@@ -16,7 +16,17 @@ public class StageController {
     }
 
     @GetMapping("/stages")
-    List<Stage> getAll() {
+    List<Stage> findAll() {
         return repository.findAll();
+    }
+
+    @GetMapping("/stages/{id}")
+    public Optional<Stage> findById(@PathVariable("id") long id) {
+        return repository.findById(id);
+    }
+
+    @PostMapping("stages")
+    public Stage saveOne(@RequestBody Stage stage) {
+        return repository.save(stage);
     }
 }
