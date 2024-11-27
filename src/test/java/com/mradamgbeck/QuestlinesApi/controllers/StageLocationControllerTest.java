@@ -70,4 +70,12 @@ public class StageLocationControllerTest {
         verify(repo).save(stageLocation1);
         assertEquals(stageLocation1, stageLocation);
     }
+
+    @Test
+    public void editOne() {
+        when(repo.save(stageLocation1)).thenReturn(stageLocation1);
+        StageLocation stageLocation = controller.editOne(stageLocation1);
+        verify(repo).save(stageLocation1);
+        assertEquals(stageLocation1, stageLocation);
+    }
 }

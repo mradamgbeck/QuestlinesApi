@@ -1,6 +1,7 @@
 package com.mradamgbeck.QuestlinesApi.controllers;
 
 import com.mradamgbeck.QuestlinesApi.entities.Stage;
+import com.mradamgbeck.QuestlinesApi.entities.StageLocation;
 import com.mradamgbeck.QuestlinesApi.repositories.StageRepository;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,5 +29,10 @@ public class StageController {
     @PostMapping("stages")
     public Stage saveOne(@RequestBody Stage stage) {
         return repository.save(stage);
+    }
+
+    @PutMapping("/stages")
+    public Stage editOne(@RequestBody Stage newStage){
+        return repository.save(newStage);
     }
 }

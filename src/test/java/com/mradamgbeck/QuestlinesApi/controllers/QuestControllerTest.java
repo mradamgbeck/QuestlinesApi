@@ -64,4 +64,12 @@ public class QuestControllerTest {
         verify(repo).save(quest1);
         assertEquals(quest1, quest);
     }
+
+    @Test
+    public void editOne() {
+        when(repo.save(quest1)).thenReturn(quest1);
+        Quest quest = controller.editOne(quest1);
+        verify(repo).save(quest1);
+        assertEquals(quest1, quest);
+    }
 }

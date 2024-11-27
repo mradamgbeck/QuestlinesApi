@@ -29,4 +29,9 @@ public class QuestController {
     public Quest saveOne(@RequestBody Quest quest) {
         return repository.save(quest);
     }
+
+    @PutMapping("/quests")
+    public Quest editOne(@RequestBody Quest quest) {
+        return repository.save(quest);
+    }
 }

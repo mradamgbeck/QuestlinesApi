@@ -63,4 +63,12 @@ public class StageControllerTest {
         verify(repo).save(stage1);
         assertEquals(stage1, stage);
     }
+
+    @Test
+    public void editOne() {
+        when(repo.save(stage1)).thenReturn(stage1);
+        Stage stage = controller.editOne(stage1);
+        verify(repo).save(stage1);
+        assertEquals(stage1, stage);
+    }
 }

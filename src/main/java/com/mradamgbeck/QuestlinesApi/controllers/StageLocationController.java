@@ -26,7 +26,12 @@ public class StageLocationController {
     }
 
     @PostMapping("/stage-locations")
-    StageLocation saveOne(@RequestBody StageLocation newLocation) {
+    public StageLocation saveOne(@RequestBody StageLocation newLocation) {
+        return repository.save(newLocation);
+    }
+
+    @PutMapping("/stage-locations")
+    public StageLocation editOne(@RequestBody StageLocation newLocation){
         return repository.save(newLocation);
     }
 }
