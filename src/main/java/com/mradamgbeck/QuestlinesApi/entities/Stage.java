@@ -2,7 +2,6 @@ package com.mradamgbeck.QuestlinesApi.entities;
 
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -23,20 +22,29 @@ public class Stage {
     private boolean complete = false;
     @Nullable
     private Date deadline;
-//    @ManyToOne
+    //    @ManyToOne
 //    @JoinColumn(name = "quest_id", nullable = false)
 //    private Quest quest;
-//    @OneToMany
-//    private List<StageLocation> locations = new ArrayList<StageLocation>();
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "STAGE_LOCATION_ID")
+    private List<StageLocation> locations = new ArrayList<>();
 
-    public Stage(String name, int priority){
+    public Stage(String name, int priority) {
         this.name = name;
         this.priority = priority;
     }
 
-    public Stage(String name, int priority, Date deadline){
+    public Stage(String name, int priority, Date deadline) {
         this.name = name;
         this.priority = priority;
         this.deadline = deadline;
+    }
+
+    public void addLocation(StageLocation location) {
+        this.locations.add(location);
+    }
+
+    public void removeLocation(StageLocation location) {
+        this.locations.remove(location);
     }
 }

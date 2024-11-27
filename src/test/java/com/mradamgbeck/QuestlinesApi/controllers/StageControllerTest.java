@@ -2,6 +2,8 @@ package com.mradamgbeck.QuestlinesApi.controllers;
 
 
 import com.mradamgbeck.QuestlinesApi.entities.Stage;
+import com.mradamgbeck.QuestlinesApi.entities.StageLocation;
+import com.mradamgbeck.QuestlinesApi.repositories.StageLocationRepository;
 import com.mradamgbeck.QuestlinesApi.repositories.StageRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,18 +23,23 @@ import static org.mockito.Mockito.when;
 public class StageControllerTest {
     StageController controller;
     @Mock
-    StageRepository repo;
+    StageRepository stageRepo;
+    @Mock
+    StageLocationRepository stageLocationRepo;
     List<Stage> stages = new ArrayList<>();
     Stage stage1;
     Stage stage2;
     Stage stage3;
+    private StageLocation location1;
 
     @BeforeEach
     public void setup() {
-        controller = new StageController(repo);
+        controller = new StageController(stageRepo);
         stage1 = new Stage("Stage 1", 1);
         stage2 = new Stage("Stage 2", 2);
         stage3 = new Stage("Stage 3", 3);
+        location1 = new StageLocation(1.0, 1.0);
+        stage1.addLocation(location1);
         stages.add(stage1);
         stages.add(stage2);
         stages.add(stage3);
@@ -40,35 +47,35 @@ public class StageControllerTest {
 
     @Test
     public void getAll() {
-        when(repo.findAll()).thenReturn(stages);
+        when(stageRepo.findAll()).thenReturn(stages);
         List<Stage> expectedStages = List.of(stage1, stage2, stage3);
         List<Stage> stages = controller.findAll();
-        verify(repo).findAll();
+        verify(stageRepo).findAll();
         assertEquals(expectedStages, stages);
     }
 
     @Test
     public void findById() {
         long stage1Id = 1L;
-        when(repo.findById(stage1Id)).thenReturn(Optional.ofNullable(stage1));
+        when(stageRepo.findById(stage1Id)).thenReturn(Optional.ofNullable(stage1));
         Optional<Stage> stage = controller.findById(stage1Id);
-        verify(repo).findById(stage1Id);
+        verify(stageRepo).findById(stage1Id);
         assertEquals(stage1, stage.get());
     }
 
     @Test
     public void saveOne() {
-        when(repo.save(stage1)).thenReturn(stage1);
+        when(stageRepo.save(stage1)).thenReturn(stage1);
         Stage stage = controller.saveOne(stage1);
-        verify(repo).save(stage1);
+        verify(stageRepo).save(stage1);
         assertEquals(stage1, stage);
     }
 
     @Test
     public void editOne() {
-        when(repo.save(stage1)).thenReturn(stage1);
+        when(stageRepo.save(stage1)).thenReturn(stage1);
         Stage stage = controller.editOne(stage1);
-        verify(repo).save(stage1);
+        verify(stageRepo).save(stage1);
         assertEquals(stage1, stage);
     }
 
@@ -76,12 +83,12 @@ public class StageControllerTest {
     public void deleteById() {
         long id = 1L;
         controller.deleteById(id);
-        verify(repo).deleteById(id);
+        verify(stageRepo).deleteById(id);
     }
 
     @Test
     public void deleteAll() {
         controller.deleteAll();
-        verify(repo).deleteAll();
+        verify(stageRepo).deleteAll();
     }
 }

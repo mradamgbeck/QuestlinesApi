@@ -30,10 +30,10 @@ class LoadDatabase {
         StageLocation location1 = new StageLocation(1.0, 1.0);
         StageLocation location2 = new StageLocation(2.0, 2.0);
         StageLocation location3 = new StageLocation(3.0, 3.0);
+        stage1.addLocation(location1);
+        stage1.addLocation(location2);
+        stage1.addLocation(location3);
         return args -> {
-            log.info("Creating Test StageLocation " + stageLocationRepository.save(location1));
-            log.info("Creating Test StageLocation " + stageLocationRepository.save(location2));
-            log.info("Creating Test StageLocation " + stageLocationRepository.save(location3));
             log.info("Creating Test Stage " + stageRepository.save(stage1));
             log.info("Creating Test Stage " + stageRepository.save(stage2));
             log.info("Creating Test Stage " + stageRepository.save(stage3));
