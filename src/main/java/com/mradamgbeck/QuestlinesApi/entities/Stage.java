@@ -1,5 +1,7 @@
 package com.mradamgbeck.QuestlinesApi.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -22,21 +24,24 @@ public class Stage {
     private boolean complete = false;
     @Nullable
     private Date deadline;
-    //    @ManyToOne
-//    @JoinColumn(name = "quest_id", nullable = false)
-//    private Quest quest;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "quest_id", nullable = false)
+    @JsonIgnoreProperties(value="stages")
+    private Quest quest;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "STAGE_LOCATION_ID")
     private List<StageLocation> locations = new ArrayList<>();
 
-    public Stage(String name, int priority) {
+    public Stage(String name, int priority, Quest quest) {
         this.name = name;
         this.priority = priority;
+        this.quest = quest;
     }
 
-    public Stage(String name, int priority, Date deadline) {
+    public Stage(String name, int priority, Quest quest, Date deadline) {
         this.name = name;
         this.priority = priority;
+        this.quest = quest;
         this.deadline = deadline;
     }
 

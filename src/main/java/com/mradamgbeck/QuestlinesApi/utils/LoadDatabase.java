@@ -24,9 +24,9 @@ class LoadDatabase {
         Quest quest1 = new Quest("Test Quest 1");
         Quest quest2 = new Quest("Test Quest 2");
         Quest quest3 = new Quest("Test Quest 3");
-        Stage stage1 = new Stage("Test Stage 1", 0, new Date(System.currentTimeMillis() + System.currentTimeMillis() / 10));
-        Stage stage2 = new Stage("Test Stage 2", 0, new Date(System.currentTimeMillis() + System.currentTimeMillis() / 10));
-        Stage stage3 = new Stage("Test Stage 3", 0, new Date(System.currentTimeMillis() + System.currentTimeMillis() / 10));
+        Stage stage1 = new Stage("Test Stage 1", 0, quest2, new Date(System.currentTimeMillis() + System.currentTimeMillis() / 10));
+        Stage stage2 = new Stage("Test Stage 2", 0, quest3, new Date(System.currentTimeMillis() + System.currentTimeMillis() / 10));
+        Stage stage3 = new Stage("Test Stage 3", 0, quest3, new Date(System.currentTimeMillis() + System.currentTimeMillis() / 10));
         StageLocation location1 = new StageLocation(1.0, 1.0);
         StageLocation location2 = new StageLocation(2.0, 2.0);
         StageLocation location3 = new StageLocation(3.0, 3.0);
@@ -34,12 +34,12 @@ class LoadDatabase {
         stage1.addLocation(location2);
         stage1.addLocation(location3);
         return args -> {
-            log.info("Creating Test Stage " + stageRepository.save(stage1));
-            log.info("Creating Test Stage " + stageRepository.save(stage2));
-            log.info("Creating Test Stage " + stageRepository.save(stage3));
             log.info("Creating Test Quest " + questRepository.save(quest1));
             log.info("Creating Test Quest " + questRepository.save(quest2));
             log.info("Creating Test Quest " + questRepository.save(quest3));
+            log.info("Creating Test Stage " + stageRepository.save(stage1));
+            log.info("Creating Test Stage " + stageRepository.save(stage2));
+            log.info("Creating Test Stage " + stageRepository.save(stage3));
         };
     }
 }

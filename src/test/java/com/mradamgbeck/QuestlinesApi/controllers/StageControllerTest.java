@@ -1,6 +1,7 @@
 package com.mradamgbeck.QuestlinesApi.controllers;
 
 
+import com.mradamgbeck.QuestlinesApi.entities.Quest;
 import com.mradamgbeck.QuestlinesApi.entities.Stage;
 import com.mradamgbeck.QuestlinesApi.entities.StageLocation;
 import com.mradamgbeck.QuestlinesApi.repositories.StageLocationRepository;
@@ -35,9 +36,10 @@ public class StageControllerTest {
     @BeforeEach
     public void setup() {
         controller = new StageController(stageRepo);
-        stage1 = new Stage("Stage 1", 1);
-        stage2 = new Stage("Stage 2", 2);
-        stage3 = new Stage("Stage 3", 3);
+        Quest quest = new Quest("Test Quest");
+        stage1 = new Stage("Stage 1", 1, quest);
+        stage2 = new Stage("Stage 2", 2, quest);
+        stage3 = new Stage("Stage 3", 3, quest);
         location1 = new StageLocation(1.0, 1.0);
         stage1.addLocation(location1);
         stages.add(stage1);
