@@ -78,4 +78,11 @@ public class StageLocationControllerTest {
         verify(repo).save(stageLocation1);
         assertEquals(stageLocation1, stageLocation);
     }
+
+    @Test
+    public void deleteById() {
+        long id = 1L;
+        controller.deleteById(id);
+        verify(repo).deleteById(id);
+    }
 }

@@ -34,4 +34,9 @@ public class StageLocationController {
     public StageLocation editOne(@RequestBody StageLocation newLocation){
         return repository.save(newLocation);
     }
+
+    @DeleteMapping("/stage-locations/{id}")
+    void deleteById(@PathVariable Long id) {
+        repository.deleteById(id);
+    }
 }

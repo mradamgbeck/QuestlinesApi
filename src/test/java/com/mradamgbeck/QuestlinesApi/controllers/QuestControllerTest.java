@@ -72,4 +72,11 @@ public class QuestControllerTest {
         verify(repo).save(quest1);
         assertEquals(quest1, quest);
     }
+
+    @Test
+    public void deleteById() {
+        long id = 1L;
+        controller.deleteById(id);
+        verify(repo).deleteById(id);
+    }
 }

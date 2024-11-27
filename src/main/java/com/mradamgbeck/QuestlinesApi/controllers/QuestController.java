@@ -34,4 +34,9 @@ public class QuestController {
     public Quest editOne(@RequestBody Quest quest) {
         return repository.save(quest);
     }
+
+    @DeleteMapping("/quests/{id}")
+    void deleteById(@PathVariable Long id) {
+        repository.deleteById(id);
+    }
 }

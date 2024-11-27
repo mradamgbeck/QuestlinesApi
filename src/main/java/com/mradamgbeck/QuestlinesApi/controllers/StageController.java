@@ -35,4 +35,9 @@ public class StageController {
     public Stage editOne(@RequestBody Stage newStage){
         return repository.save(newStage);
     }
+
+    @DeleteMapping("/stages/{id}")
+    void deleteById(@PathVariable Long id) {
+        repository.deleteById(id);
+    }
 }
