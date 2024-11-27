@@ -40,4 +40,9 @@ public class StageController {
     void deleteById(@PathVariable Long id) {
         repository.deleteById(id);
     }
+
+    @DeleteMapping("/stages")
+    void deleteAll() {
+        repository.deleteAll();
+    }
 }

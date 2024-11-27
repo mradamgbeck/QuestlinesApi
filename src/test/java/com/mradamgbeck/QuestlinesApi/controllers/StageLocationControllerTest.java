@@ -85,4 +85,10 @@ public class StageLocationControllerTest {
         controller.deleteById(id);
         verify(repo).deleteById(id);
     }
+
+    @Test
+    public void deleteAll() {
+        controller.deleteAll();
+        verify(repo).deleteAll();
+    }
 }

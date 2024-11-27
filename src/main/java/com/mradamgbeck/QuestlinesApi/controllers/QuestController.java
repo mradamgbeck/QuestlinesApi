@@ -39,4 +39,9 @@ public class QuestController {
     void deleteById(@PathVariable Long id) {
         repository.deleteById(id);
     }
+
+    @DeleteMapping("/quests")
+    void deleteAll() {
+        repository.deleteAll();
+    }
 }
