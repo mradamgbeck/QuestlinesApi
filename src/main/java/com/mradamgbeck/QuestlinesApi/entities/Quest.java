@@ -1,10 +1,6 @@
 package com.mradamgbeck.QuestlinesApi.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import lombok.AllArgsConstructor;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,9 +8,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@NoArgsConstructor
-@Data
 @Entity
+@Data
+@NoArgsConstructor
 public class Quest {
     @Id
     @GeneratedValue
@@ -23,14 +19,18 @@ public class Quest {
     private boolean selected = false;
     private boolean complete = false;
     private Date created = new Date();
-//    @OneToMany(mappedBy = "quest")
-//    private List<Stage> stages = new ArrayList<Stage>();
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Stage> stages = new ArrayList<>();
 
-    public Quest(String name){
+    public Quest(String name) {
         this.name = name;
     }
 
-//    public void addStage(Stage stage){
-//        this.stages.add(stage);
-//    }
+    public void addStage(Stage stage) {
+        this.stages.add(stage);
+    }
+
+    public void removeStage(Stage stage) {
+        this.stages.remove(stage);
+    }
 }

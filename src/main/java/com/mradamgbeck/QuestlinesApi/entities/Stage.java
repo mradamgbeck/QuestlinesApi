@@ -3,7 +3,9 @@ package com.mradamgbeck.QuestlinesApi.entities;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,13 +22,9 @@ public class Stage {
     private int priority = 0;
     private boolean selected = false;
     private boolean complete = false;
-    @Nullable
     private Date deadline;
-    //    @ManyToOne
-//    @JoinColumn(name = "quest_id", nullable = false)
-//    private Quest quest;
+
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "STAGE_LOCATION_ID")
     private List<StageLocation> locations = new ArrayList<>();
 
     public Stage(String name, int priority) {
@@ -47,4 +45,5 @@ public class Stage {
     public void removeLocation(StageLocation location) {
         this.locations.remove(location);
     }
+
 }
