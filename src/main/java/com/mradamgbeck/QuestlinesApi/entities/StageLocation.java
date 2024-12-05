@@ -1,7 +1,9 @@
 package com.mradamgbeck.QuestlinesApi.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,6 +17,8 @@ public class StageLocation {
     private double latitude;
     private double longitude;
     private boolean complete = false;
+    @Column(name = "stage_id")
+    private Long stageId;
 
     public StageLocation(double latitude, double longitude) {
         this.latitude = latitude;

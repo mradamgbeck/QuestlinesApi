@@ -20,6 +20,7 @@ public class Quest {
     private boolean complete = false;
     private Date created = new Date();
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "quest_id")
     private List<Stage> stages = new ArrayList<>();
 
     public Quest(String name) {

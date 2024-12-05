@@ -1,11 +1,8 @@
 package com.mradamgbeck.QuestlinesApi.entities;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,8 +20,10 @@ public class Stage {
     private boolean selected = false;
     private boolean complete = false;
     private Date deadline;
-
+    @Column(name = "quest_id")
+    private Long questId;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "stage_id")
     private List<StageLocation> locations = new ArrayList<>();
 
     public Stage(String name, int priority) {
